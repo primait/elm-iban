@@ -48,3 +48,12 @@ The library converts back the IBAN code in 2 string representations:
 > IBAN.toString Electronic (IBAN Belgium "68" "539007547034")
 "BE68539007547034" : String
 ```
+
+
+## Test
+
+to run the tests 
+
+```
+$ elm test 
+```
