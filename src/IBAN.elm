@@ -23,7 +23,7 @@ import IBAN.Types exposing (..)
 import IBAN.Validate as Validate
 
 
-{-| creates an IBAN value from a string
+{-| Creates an IBAN value from a string
 
 Builds and validates an IBAN given a String.
 
