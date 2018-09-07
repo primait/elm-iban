@@ -58,10 +58,10 @@ build string =
         bban =
             String.dropLeft 4 string
     in
-        country
-            |> Result.map IBAN
-            |> Result.map (apply checkCode)
-            |> Result.map (apply bban)
+    country
+        |> Result.map IBAN
+        |> Result.map (apply checkCode)
+        |> Result.map (apply bban)
 
 
 apply : a -> (a -> b) -> b
@@ -101,32 +101,36 @@ toString : Format -> IBAN -> String
 toString t =
     case t of
         Textual ->
-            textual
+            toTextualString
 
         Electronic ->
-            electronic
+            toElectronicString
 
 
-textual : IBAN -> String
-textual =
-    electronic >> groupBy 4
+toTextualString : IBAN -> String
+toTextualString =
+    toElectronicString >> groupByGroupsOf 4
 
 
-electronic : IBAN -> String
-electronic (IBAN country checkCode bban) =
+toElectronicString : IBAN -> String
+toElectronicString (IBAN country checkCode bban) =
     Country.toString country ++ checkCode ++ bban
 
 
-groupBy : Int -> String -> String
-groupBy n string =
-    if String.length string <= n then
-        string
-    else
-        let
-            g0 =
-                String.left n string
+partitionAll : Int -> List a -> List (List a)
+partitionAll n coll =
+    case coll of
+        [] ->
+            []
 
-            gs =
-                String.dropLeft n string
-        in
-            g0 ++ " " ++ groupBy n gs
+        _ ->
+            List.take n coll :: partitionAll n (List.drop n coll)
+
+
+groupByGroupsOf : Int -> String -> String
+groupByGroupsOf n =
+    String.toList
+        >> partitionAll 4
+        >> List.map String.fromList
+        >> List.intersperse " "
+        >> String.concat
