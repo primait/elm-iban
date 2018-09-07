@@ -1,13 +1,15 @@
 {
     "version": "1.0.1",
     "summary": "Iban validation in elm",
+    "name": "primait/elm-iban",
     "repository": "https://github.com/primait/elm-iban.git",
-    "license": "BSD3",
+    "license": "MIT",
     "source-directories": [
         "src/"
     ],
     "exposed-modules": [
-        "IBAN"
+        "IBAN",
+        "IBAN.Types"
     ],
     "dependencies": {
         "elm-lang/core": "5.0.0 <= v < 6.0.0"

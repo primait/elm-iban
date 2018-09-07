@@ -8,19 +8,45 @@ module IBAN.Types
         , IBAN(..)
         )
 
+{-| Types
+various types used by IBAN library
 
+
+## Types
+
+@docs IBAN
+@docs Country
+@docs CheckCode
+@docs BBAN
+@docs Error
+@docs Format
+
+-}
+
+
+{-| IBAN type.
+-}
 type IBAN
     = IBAN Country CheckCode BBAN
 
 
+{-| CheckCode is a 2 digit string
+-}
 type alias CheckCode =
     String
 
 
+{-| BBAN is just a string
+-}
 type alias BBAN =
     String
 
 
+{-| Error
+
+The `Err` part of the result of `fromString` operation
+
+-}
 type Error
     = IBANLengthError Country { actual : Int, expected : Int }
     | InvalidCharacter
@@ -28,11 +54,19 @@ type Error
     | UnknownCountryCode String
 
 
+{-| Format
+Enumeration used to dispatch `toString` to the right formatter
+-}
 type Format
     = Textual
     | Electronic
 
 
+{-| Country
+
+Enumeration of all the countries that supports IBAN format
+
+-}
 type Country
     = Albania
     | Algeria

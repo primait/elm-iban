@@ -542,5 +542,5 @@ fromString code =
         "GB" ->
             Ok UnitedKingdom
 
-        code ->
-            Err (UnknownCountryCode code)
+        code_ ->
+            Err (UnknownCountryCode code_)
