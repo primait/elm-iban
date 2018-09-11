@@ -1,8 +1,8 @@
 module Suite exposing (suite)
 
 import Expect exposing (Expectation)
-import Test exposing (..)
 import IBAN
+import Test exposing (..)
 
 
 validIBANs : List String

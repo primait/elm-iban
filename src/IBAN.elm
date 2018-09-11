@@ -1,8 +1,7 @@
-module IBAN
-    exposing
-        ( fromString
-        , toString
-        )
+module IBAN exposing
+    ( fromString
+    , toString
+    )
 
 {-| IBAN parser
 

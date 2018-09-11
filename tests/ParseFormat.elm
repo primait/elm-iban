@@ -1,4 +1,4 @@
-module ParseFormat exposing (..)
+module ParseFormat exposing (suite)
 
 import Expect exposing (Expectation)
 import IBAN

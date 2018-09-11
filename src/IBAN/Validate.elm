@@ -1,10 +1,9 @@
-module IBAN.Validate
-    exposing
-        ( chars
-        , sanityCheck
-        , ibanLength
-        , length
-        )
+module IBAN.Validate exposing
+    ( chars
+    , ibanLength
+    , length
+    , sanityCheck
+    )
 
 {-| Validation
 
@@ -37,10 +36,11 @@ length country string =
         actual =
             String.length string
     in
-        if expected == actual then
-            Ok string
-        else
-            Err (lengthErr country actual expected)
+    if expected == actual then
+        Ok string
+
+    else
+        Err (lengthErr country actual expected)
 
 
 lengthErr : Country -> Int -> Int -> Error
@@ -53,13 +53,14 @@ lengthErr country actual expected =
 
 {-| Character validation
 
-Checks that all characters in the string are valid (i.e. alphanumeric*)
+Checks that all characters in the string are valid (i.e. alphanumeric\*)
 
 -}
 chars : String -> Result Error String
 chars string =
     if String.all isAlphaNumeric string then
         Ok string
+
     else
         Err InvalidCharacter
 
@@ -69,13 +70,14 @@ chars string =
 Performs sanity check
 
 see:
-<https://en.wikipedia.org/wiki/International_Bank_Account_Number#Structure>
+[[[https://en.wikipedia.org/wiki/International\_Bank\_Account\_Number#Structure](https://en.wikipedia.org/wiki/International_Bank_Account_Number#Structure)](https://en.wikipedia.org/wiki/International_Bank_Account_Number#Structure)](https://en.wikipedia.org/wiki/International_Bank_Account_Number#Structure)
 
 -}
 sanityCheck : String -> Result Error String
 sanityCheck string =
     if performSanityCheck string then
         Ok string
+
     else
         Err SanityCheckFailed
 
@@ -378,7 +380,7 @@ performSanityCheck =
 
 digitToInt : Char -> Int
 digitToInt =
-    Char.toCode >> flip (-) base0
+    Char.toCode >> (\a -> (-) a base0)
 
 
 prepare : String -> String
@@ -392,8 +394,9 @@ convert : Char -> String
 convert char =
     if Char.isDigit char then
         String.fromChar char
+
     else
-        toString (Char.toCode char - baseA + 10)
+        String.fromInt (Char.toCode char - baseA + 10)
 
 
 baseA : Int
@@ -411,7 +414,7 @@ base0 =
 Modulo operation on the iban number. the number is represented as a sequence of Int digits.
 
 see:
-<https://en.wikipedia.org/wiki/International_Bank_Account_Number#Modulo_operation_on_IBAN>
+[[[https://en.wikipedia.org/wiki/International\_Bank\_Account\_Number#Modulo\_operation\_on\_IBAN](https://en.wikipedia.org/wiki/International_Bank_Account_Number#Modulo_operation_on_IBAN)](https://en.wikipedia.org/wiki/International_Bank_Account_Number#Modulo_operation_on_IBAN)](https://en.wikipedia.org/wiki/International_Bank_Account_Number#Modulo_operation_on_IBAN)
 
 -}
 modulo : Int -> List Int -> Int
@@ -421,7 +424,7 @@ modulo div =
 
 folder : Int -> Int -> Int -> Int
 folder div digit total =
-    (total * 10 + digit) % div
+    modBy div (total * 10 + digit)
 
 
 rotate : Int -> String -> String

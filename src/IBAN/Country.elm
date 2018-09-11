@@ -1,8 +1,7 @@
-module IBAN.Country
-    exposing
-        ( fromString
-        , toString
-        )
+module IBAN.Country exposing
+    ( fromString
+    , toString
+    )
 
 import IBAN.Types exposing (..)
 
@@ -542,5 +541,5 @@ fromString code =
         "GB" ->
             Ok UnitedKingdom
 
-        code ->
+        _ ->
             Err (UnknownCountryCode code)

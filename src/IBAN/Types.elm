@@ -1,12 +1,11 @@
-module IBAN.Types
-    exposing
-        ( BBAN
-        , CheckCode
-        , Country(..)
-        , Error(..)
-        , Format(..)
-        , IBAN(..)
-        )
+module IBAN.Types exposing
+    ( BBAN
+    , CheckCode
+    , Country(..)
+    , Error(..)
+    , Format(..)
+    , IBAN(..)
+    )
 
 
 type IBAN
